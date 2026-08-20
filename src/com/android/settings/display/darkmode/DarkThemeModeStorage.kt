@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -26,43 +26,30 @@ import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.datastore.SettingsSecureStore
 
 class DarkThemeModeStorage(context: Context) :
-    AbstractKeyedDataObservable<String>(), KeyValueStore, KeyedObserver<String> {
+    AbstractKeyedDataObservable<String>(), KeyedObserver<String>, KeyValueStore {
+    val settingsStore = SettingsSecureStore.get(context)
 
-    private val settingsStore = SettingsSecureStore.get(context)
-
-    override fun contains(key: String): Boolean =
+    override fun contains(key: String) =
         key == StandardDarkModeSelectorPreference.KEY ||
-        key == ExpandedDarkModeSelectorPreference.KEY ||
-        key == TrueDarkModeSelectorPreference.KEY
+            key == ExpandedDarkModeSelectorPreference.KEY
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : Any> getValue(key: String, valueType: Class<T>): T? {
-        val mode = settingsStore.getInt(KEY, MODE_STANDARD)
-        val selected = when (key) {
-            StandardDarkModeSelectorPreference.KEY -> mode == MODE_STANDARD
-            ExpandedDarkModeSelectorPreference.KEY -> mode == MODE_EXPANDED
-            TrueDarkModeSelectorPreference.KEY -> mode == MODE_TRUE_DARK
-            else -> false
+        val enabled = settingsStore.getBoolean(KEY) == true
+        return when (key) {
+            StandardDarkModeSelectorPreference.KEY -> (!enabled) as T?
+            ExpandedDarkModeSelectorPreference.KEY -> enabled as T?
+            else -> false as T?
         }
-        return selected as T?
     }
 
     override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) {
-        if (value !is Boolean || !value) return
-
-        val newMode = when (key) {
-            StandardDarkModeSelectorPreference.KEY -> MODE_STANDARD
-            ExpandedDarkModeSelectorPreference.KEY -> MODE_EXPANDED
-            TrueDarkModeSelectorPreference.KEY -> MODE_TRUE_DARK
+        if (value !is Boolean) return
+        when (key) {
+            StandardDarkModeSelectorPreference.KEY -> settingsStore.setBoolean(KEY, !value)
+            ExpandedDarkModeSelectorPreference.KEY -> settingsStore.setBoolean(KEY, value)
             else -> return
         }
-
-        settingsStore.setInt(KEY, newMode)
-        // Sync accessibility invert behavior for expanded mode
-        settingsStore.setBoolean(
-            Settings.Secure.ACCESSIBILITY_FORCE_INVERT_COLOR_ENABLED,
-            newMode == MODE_EXPANDED
-        )
     }
 
     override fun onFirstObserverAdded() {
@@ -78,12 +65,10 @@ class DarkThemeModeStorage(context: Context) :
     }
 
     companion object {
-        const val KEY = "dark_theme_mode"
-        const val MODE_STANDARD = 0
-        const val MODE_EXPANDED = 1
-        const val MODE_TRUE_DARK = 2
+        const val KEY = Settings.Secure.ACCESSIBILITY_FORCE_INVERT_COLOR_ENABLED
 
         fun getReadPermissions() = SettingsSecureStore.getReadPermissions()
+
         fun getWritePermissions() = SettingsSecureStore.getWritePermissions()
     }
 }

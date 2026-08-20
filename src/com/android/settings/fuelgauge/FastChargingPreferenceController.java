@@ -1,16 +1,13 @@
 package com.android.settings.fuelgauge;
 
 import android.content.Context;
-import androidx.preference.Preference;
-import androidx.preference.SwitchPreferenceCompat;
-import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.TogglePreferenceController;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class FastChargingPreferenceController extends BasePreferenceController {
+public class FastChargingPreferenceController extends TogglePreferenceController {
 
-    private static final String PREF_KEY = "fast_charging_enabled";
     private static final String FAST_CHARGE_PATH = "/sys/class/qcom-battery/restrict_chg";
 
     public FastChargingPreferenceController(Context context, String preferenceKey) {
@@ -23,23 +20,7 @@ public class FastChargingPreferenceController extends BasePreferenceController {
     }
 
     @Override
-    public void updateState(Preference preference) {
-        if (preference instanceof SwitchPreferenceCompat) {
-            ((SwitchPreferenceCompat) preference).setChecked(isFastChargingEnabled());
-        }
-    }
-
-    @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        if (!PREF_KEY.equals(preference.getKey())) return false;
-        if (preference instanceof SwitchPreferenceCompat) {
-            boolean enabled = ((SwitchPreferenceCompat) preference).isChecked();
-            setFastCharging(enabled);
-        }
-        return true;
-    }
-
-    private boolean isFastChargingEnabled() {
+    public boolean isChecked() {
         try (FileReader fr = new FileReader(FAST_CHARGE_PATH)) {
             return fr.read() == '0';
         } catch (IOException e) {
@@ -47,11 +28,18 @@ public class FastChargingPreferenceController extends BasePreferenceController {
         }
     }
 
-    private void setFastCharging(boolean enable) {
+    @Override
+    public boolean setChecked(boolean isChecked) {
         try (FileWriter fw = new FileWriter(FAST_CHARGE_PATH)) {
-            fw.write(enable ? "0" : "1");
+            fw.write(isChecked ? "0" : "1");
+            return true;
         } catch (IOException e) {
-            // ignore
+            return false;
         }
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return 0;
     }
 }

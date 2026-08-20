@@ -111,24 +111,4 @@ class ExpandedDarkModeSelectorPreference(dataStore: DarkThemeModeStorage) :
         const val KEY = "expanded_dark_theme"
     }
 }
-/** The "True Dark Theme" preference. */
-class TrueDarkModeSelectorPreference(dataStore: DarkThemeModeStorage) :
-    DarkModeSelectorPreference(dataStore) {
-
-    override val key
-        get() = KEY
-
-    override val title
-        get() = R.string.accessibility_true_dark_theme_title
-
-    override val summary
-        get() = R.string.accessibility_true_dark_theme_summary
-
-    override fun getIndexableTitle(context: Context): CharSequence? =
-        context.getText(R.string.accessibility_true_dark_theme_title)
-
-    companion object {
-        const val KEY = "true_dark_theme"
-    }
-}
 // LINT.ThenChange(/src/com/android/settings/accessibility/ForceInvertPreferenceController.java)
