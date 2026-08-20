@@ -75,8 +75,14 @@
             android:title="@string/battery_percentage"
             android:summary="@string/battery_percentage_description"
             settings:controller="com.android.settings.display.BatteryPercentagePreferenceController" />
+
+        <SwitchPreferenceCompat
+            android:key="fast_charging_enabled"
+            android:title="@string/fast_charging_title"
+            android:summary="@string/fast_charging_summary"
+            settings:controller="com.android.settings.fuelgauge.FastChargingPreferenceController" />
     </com.android.settingslib.widget.UntitledPreferenceCategory>
-    
+
     <com.miku.settings.preferences.SecureSettingSwitchPreference
         android:key="cpu_performance_mode"
         android:title="@string/cpu_performance_mode_title"
@@ -88,4 +94,5 @@
         android:key="power_usage_footer"
         android:title="@string/battery_footer_summary"
         settings:searchable="false" />
+
 </PreferenceScreen>
