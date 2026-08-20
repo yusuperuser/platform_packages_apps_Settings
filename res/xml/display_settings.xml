@@ -226,3 +226,7 @@
 
     </PreferenceCategory>
 </PreferenceScreen>
+<com.android.settings.display.darkmode.TrueDarkModeSelectorPreference
+    android:key="dark_theme_true_dark"
+    android:title="@string/accessibility_true_dark_theme_title"
+    android:summary="@string/accessibility_true_dark_theme_summary" />

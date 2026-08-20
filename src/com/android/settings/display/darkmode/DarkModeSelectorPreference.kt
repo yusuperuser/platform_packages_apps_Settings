@@ -17,82 +17,53 @@
 package com.android.settings.display.darkmode
 
 import android.content.Context
-import androidx.preference.Preference
+import android.util.AttributeSet
 import com.android.settings.R
-import com.android.settings.accessibility.Flags
-import com.android.settingslib.datastore.KeyValueStore
-import com.android.settingslib.metadata.BooleanValuePreference
-import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.PreferenceIndexableTitleProvider
-import com.android.settingslib.metadata.PreferenceMetadata
-import com.android.settingslib.metadata.ReadWritePermit
-import com.android.settingslib.metadata.SensitivityLevel
-import com.android.settingslib.preference.BooleanValuePreferenceBinding
-import com.android.settingslib.widget.SelectorWithWidgetPreference
 
-// LINT.IfChange
-sealed class DarkModeSelectorPreference(private val dataStore: DarkThemeModeStorage) :
-    BooleanValuePreference,
-    BooleanValuePreferenceBinding,
-    SelectorWithWidgetPreference.OnClickListener,
-    PreferenceAvailabilityProvider,
-    PreferenceIndexableTitleProvider {
+sealed class DarkModeSelectorPreference(
+    context: Context,
+    attrs: AttributeSet?,
+) : RadioButtonPreference(context, attrs) {
 
-    override fun storage(context: Context): KeyValueStore = dataStore
-
-    override fun getReadPermissions(context: Context) = DarkThemeModeStorage.getReadPermissions()
-
-    override fun getWritePermissions(context: Context) = DarkThemeModeStorage.getWritePermissions()
-
-    override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
-        ReadWritePermit.ALLOW
-
-    override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
-        ReadWritePermit.ALLOW
-
-    override val sensitivityLevel
-        get() = SensitivityLevel.NO_SENSITIVITY
-
-    override fun isAvailable(context: Context): Boolean =
-        Flags.forceInvertColor()
-
-    override fun onRadioButtonClicked(selectedEmphasizedPreference: SelectorWithWidgetPreference) {
-        dataStore.setValue(key, Boolean::class.java, true)
+    init {
+        // Ensure only one radio button is checked in the group
+        isPersistent = false
     }
 
-    override fun bind(preference: Preference) {
-        super.bind(preference)
-        if (preference is SelectorWithWidgetPreference) {
-            preference.setOnClickListener(this)
-        }
+    override fun onClick() {
+        super.onClick()
+        // Notify storage or handle selection if needed
     }
 }
 
-/** The "Standard Dark Theme" preference. */
-class StandardDarkModeSelectorPreference(dataStore: DarkThemeModeStorage) :
-    DarkModeSelectorPreference(dataStore) {
-
+class StandardDarkModeSelectorPreference(
+    context: Context,
+    attrs: AttributeSet?,
+) : DarkModeSelectorPreference(context, attrs) {
     override val key
         get() = KEY
 
     override val title
-        get() = R.string.accessibility_standard_dark_theme_title
+        get() = R.string.dark_theme_ui_mode_standard
 
     override val summary
-        get() = R.string.accessibility_standard_dark_theme_summary
+        get() = R.string.dark_theme_ui_mode_standard_summary
+
+    override val keywords: Int
+        get() = R.string.keywords_standard_dark_theme
 
     override fun getIndexableTitle(context: Context): CharSequence? =
-        context.getText(R.string.accessibility_standard_dark_theme_title_in_search)
+        context.getText(R.string.dark_theme_ui_mode_standard)
 
     companion object {
         const val KEY = "standard_dark_theme"
     }
 }
 
-/** The "Expanded Dark Theme" preference. */
-class ExpandedDarkModeSelectorPreference(dataStore: DarkThemeModeStorage) :
-    DarkModeSelectorPreference(dataStore) {
-
+class ExpandedDarkModeSelectorPreference(
+    context: Context,
+    attrs: AttributeSet?,
+) : DarkModeSelectorPreference(context, attrs) {
     override val key
         get() = KEY
 
@@ -100,23 +71,23 @@ class ExpandedDarkModeSelectorPreference(dataStore: DarkThemeModeStorage) :
         get() = R.string.accessibility_expanded_dark_theme_title
 
     override val summary
-        get() = R.string.accessibility_expanded_dark_theme_summary
+        get() = R.string.accessibility_true_dark_theme_summary
 
     override val keywords: Int
         get() = R.string.keywords_expanded_dark_theme
 
     override fun getIndexableTitle(context: Context): CharSequence? =
-        context.getText(R.string.accessibility_expanded_dark_theme_title_in_search)
+        context.getText(R.string.accessibility_true_dark_theme_title_in_search)
 
     companion object {
         const val KEY = "expanded_dark_theme"
     }
 }
 
-/** The "True Dark Theme" preference. */
-class TrueDarkModeSelectorPreference(dataStore: DarkThemeModeStorage) :
-    DarkModeSelectorPreference(dataStore) {
-
+class TrueDarkModeSelectorPreference(
+    context: Context,
+    attrs: AttributeSet?,
+) : DarkModeSelectorPreference(context, attrs) {
     override val key
         get() = KEY
 
@@ -126,11 +97,13 @@ class TrueDarkModeSelectorPreference(dataStore: DarkThemeModeStorage) :
     override val summary
         get() = R.string.accessibility_true_dark_theme_summary
 
+    override val keywords: Int
+        get() = R.string.keywords_expanded_dark_theme
+
     override fun getIndexableTitle(context: Context): CharSequence? =
-        context.getText(R.string.accessibility_true_dark_theme_title_in_search)
+        context.getText(R.string.accessibility_true_dark_theme_title)
 
     companion object {
-        const val KEY = "true_dark_theme"
+        const val KEY = "dark_theme_true_dark"
     }
 }
-// LINT.ThenChange(/src/com/android/settings/accessibility/ForceInvertPreferenceController.java)
