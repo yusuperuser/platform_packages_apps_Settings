@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -53,17 +53,18 @@ sealed class DarkModeSelectorPreference(private val dataStore: DarkThemeModeStor
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
 
-    override fun isAvailable(context: Context) = Flags.catalystDarkUiMode()
+    override fun isAvailable(context: Context): Boolean =
+        Flags.forceInvertColor()
 
-    override fun createWidget(context: Context) = SelectorWithWidgetPreference(context)
-
-    override fun bind(preference: Preference, metadata: PreferenceMetadata) {
-        super.bind(preference, metadata)
-        (preference as SelectorWithWidgetPreference).setOnClickListener(this)
+    override fun onRadioButtonClicked(selectedEmphasizedPreference: SelectorWithWidgetPreference) {
+        dataStore.setValue(key, Boolean::class.java, true)
     }
 
-    override fun onRadioButtonClicked(emiter: SelectorWithWidgetPreference) {
-        emiter.isChecked = true
+    override fun bind(preference: Preference) {
+        super.bind(preference)
+        if (preference is SelectorWithWidgetPreference) {
+            preference.setOnClickListener(this)
+        }
     }
 }
 
@@ -109,6 +110,27 @@ class ExpandedDarkModeSelectorPreference(dataStore: DarkThemeModeStorage) :
 
     companion object {
         const val KEY = "expanded_dark_theme"
+    }
+}
+
+/** The "True Dark Theme" preference. */
+class TrueDarkModeSelectorPreference(dataStore: DarkThemeModeStorage) :
+    DarkModeSelectorPreference(dataStore) {
+
+    override val key
+        get() = KEY
+
+    override val title
+        get() = R.string.accessibility_true_dark_theme_title
+
+    override val summary
+        get() = R.string.accessibility_true_dark_theme_summary
+
+    override fun getIndexableTitle(context: Context): CharSequence? =
+        context.getText(R.string.accessibility_true_dark_theme_title_in_search)
+
+    companion object {
+        const val KEY = "true_dark_theme"
     }
 }
 // LINT.ThenChange(/src/com/android/settings/accessibility/ForceInvertPreferenceController.java)
