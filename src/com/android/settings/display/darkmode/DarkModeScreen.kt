@@ -110,6 +110,7 @@ abstract class BaseDarkModeScreen(context: Context) :
                     val modeStorage = DarkThemeModeStorage(context)
                     +StandardDarkModeSelectorPreference(modeStorage)
                     +ExpandedDarkModeSelectorPreference(modeStorage)
+                    +TrueDarkPreference()
                 }
             }
             +PreferenceCategory("display_category", R.string.dark_theme_timing_category) += {
@@ -119,7 +120,6 @@ abstract class BaseDarkModeScreen(context: Context) :
                 +EndTimePreference(uiModeManager)
             }
             +DarkModePendingLocationFooterPreference()
-            +TrueDarkPreference()
             +DarkModeExpandedFooterPreference()
             +DarkModeCustomModesFooterPreference()
             +FeedbackButtonPreference { FeedbackManager(context, metricsCategory) }
