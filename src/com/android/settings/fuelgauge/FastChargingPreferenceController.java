@@ -1,6 +1,8 @@
 package com.android.settings.fuelgauge;
 
 import android.content.Context;
+import androidx.preference.Preference;
+import androidx.preference.TwoStatePreference;
 import com.android.settings.core.TogglePreferenceController;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -35,6 +37,14 @@ public class FastChargingPreferenceController extends TogglePreferenceController
             return true;
         } catch (IOException e) {
             return false;
+        }
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        if (preference instanceof TwoStatePreference) {
+            ((TwoStatePreference) preference).setChecked(isChecked());
         }
     }
 
