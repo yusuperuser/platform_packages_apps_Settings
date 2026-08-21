@@ -32,7 +32,7 @@ class TrueDarkPreference : BooleanValuePreference {
         private const val OVERLAY_PKG = "com.android.theme.truedark"
     }
 
-    private class TrueDarkStore(private val context: Context) : AbstractKeyedDataObservable() {
+    private class TrueDarkStore(private val context: Context) : AbstractKeyedDataObservable<String>(), KeyValueStore {
         private val overlayManager: IOverlayManager = IOverlayManager.Stub.asInterface(
             ServiceManager.getService(Context.OVERLAY_SERVICE))
 
