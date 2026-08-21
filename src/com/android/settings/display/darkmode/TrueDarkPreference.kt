@@ -20,7 +20,7 @@ class TrueDarkPreference : BooleanValuePreference {
     override fun storage(context: Context): KeyValueStore = TrueDarkStore(context)
 
     override fun getReadPermit(context: Context, myUid: Int, callingUid: Int) =
-        ReadWritePermit.ALLOW
+            ReadWritePermit.ALLOW
 
     override fun getWritePermit(context: Context, value: Boolean?, myUid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
@@ -34,23 +34,44 @@ class TrueDarkPreference : BooleanValuePreference {
 
     private class TrueDarkStore(private val context: Context) : AbstractKeyedDataObservable<String>(), KeyValueStore {
         private val overlayManager: IOverlayManager = IOverlayManager.Stub.asInterface(
-            ServiceManager.getService(Context.OVERLAY_SERVICE))
+                ServiceManager.getService(Context.OVERLAY_SERVICE))
 
-        override fun getBoolean(key: String, defValue: Boolean): Boolean {
-            return try {
-                val info = overlayManager.getOverlayInfo(OVERLAY_PKG, UserHandle.myUserId())
-                info?.isEnabled == true
-            } catch (e: Exception) {
-                defValue
+        override fun onFirstObserverAdded() {}
+        override fun onLastObserverRemoved() {}
+
+        override fun contains(key: String): Boolean = true
+
+        override fun <T : Any> getValue(key: String, valueType: Class<T>): T? {
+            if (valueType == Boolean::class.java) {
+                val result = try {
+                    val info = overlayManager.getOverlayInfo(OVERLAY_PKG, UserHandle.myUserId())
+                    info?.isEnabled == true
+                } catch (e: Exception) { false }
+                @Suppress("UNCHECKED_CAST")
+                return result as T?
+            }
+            return null
+        }
+
+        override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) {
+            if (valueType == Boolean::class.java) {
+                try {
+                    overlayManager.setEnabled(OVERLAY_PKG, value as? Boolean ?: false, UserHandle.myUserId())
+                } catch (e: Exception) {}
             }
         }
 
-        override fun setBoolean(key: String, value: Boolean) {
+        override fun getBoolean(key: String): Boolean? {
+            return try {
+                val info = overlayManager.getOverlayInfo(OVERLAY_PKG, UserHandle.myUserId())
+                info?.isEnabled == true
+            } catch (e: Exception) { false }
+        }
+
+        override fun setBoolean(key: String, value: Boolean?) {
             try {
-                overlayManager.setEnabled(OVERLAY_PKG, value, UserHandle.myUserId())
-            } catch (e: Exception) {
-                // ignore
-            }
+                overlayManager.setEnabled(OVERLAY_PKG, value ?: false, UserHandle.myUserId())
+            } catch (e: Exception) {}
         }
     }
 }
