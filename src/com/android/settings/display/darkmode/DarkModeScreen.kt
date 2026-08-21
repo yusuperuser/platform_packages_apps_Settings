@@ -105,14 +105,12 @@ abstract class BaseDarkModeScreen(context: Context) :
             +DarkModeTopIntroPreference()
             +DarkModeMainSwitchPreference(darkModeStorage)
             +TwilightLocationPreference()
-            if (android.view.accessibility.Flags.forceInvertColor()) {
-                +PreferenceCategory("dark_theme_group", R.string.dark_theme_version_category) += {
+            +PreferenceCategory("dark_theme_group", R.string.dark_theme_version_category) += {
                     val modeStorage = DarkThemeModeStorage(context)
                     +StandardDarkModeSelectorPreference(modeStorage)
                     +ExpandedDarkModeSelectorPreference(modeStorage)
                     +TrueDarkPreference()
                 }
-            }
             +PreferenceCategory("display_category", R.string.dark_theme_timing_category) += {
                 val uiModeManager = context.getSystemService(UiModeManager::class.java)
                 +DarkModeSchedulePreference(uiModeManager!!, BedtimeSettings(context))
