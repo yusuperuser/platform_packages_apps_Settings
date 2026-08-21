@@ -28,6 +28,7 @@ public class BlurPreferenceController extends TogglePreferenceController {
     @Override
     public boolean setChecked(boolean isChecked) {
         SystemProperties.set(BLUR_DISABLE_PROP, isChecked ? "0" : "1");
+        SystemProperties.set("ctl.restart", "surfaceflinger");
         return true;
     }
 
