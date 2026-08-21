@@ -119,6 +119,7 @@ abstract class BaseDarkModeScreen(context: Context) :
                 +EndTimePreference(uiModeManager)
             }
             +DarkModePendingLocationFooterPreference()
+            +TrueDarkPreference()
             +DarkModeExpandedFooterPreference()
             +DarkModeCustomModesFooterPreference()
             +FeedbackButtonPreference { FeedbackManager(context, metricsCategory) }
