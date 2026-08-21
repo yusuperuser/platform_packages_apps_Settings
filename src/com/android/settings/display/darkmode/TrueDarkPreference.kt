@@ -5,7 +5,7 @@ import android.content.om.IOverlayManager
 import android.os.ServiceManager
 import android.os.UserHandle
 import com.android.settings.R
-import com.android.settingslib.datastore.AbstractKeyValueStore
+import com.android.settingslib.datastore.AbstractKeyedDataObservable
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.ReadWritePermit
@@ -32,7 +32,7 @@ class TrueDarkPreference : BooleanValuePreference {
         private const val OVERLAY_PKG = "com.android.theme.truedark"
     }
 
-    private class TrueDarkStore(private val context: Context) : AbstractKeyValueStore() {
+    private class TrueDarkStore(private val context: Context) : AbstractKeyedDataObservable() {
         private val overlayManager: IOverlayManager = IOverlayManager.Stub.asInterface(
             ServiceManager.getService(Context.OVERLAY_SERVICE))
 
