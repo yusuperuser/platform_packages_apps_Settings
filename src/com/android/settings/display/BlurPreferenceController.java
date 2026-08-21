@@ -2,12 +2,11 @@ package com.android.settings.display;
 
 import android.content.Context;
 import android.os.SystemProperties;
+import android.provider.Settings;
 
 import com.android.settings.core.TogglePreferenceController;
 
 public class BlurPreferenceController extends TogglePreferenceController {
-
-    private static final String BLUR_DISABLE_PROP = "persist.sys.sf.disable_blurs";
 
     public BlurPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -22,13 +21,16 @@ public class BlurPreferenceController extends TogglePreferenceController {
 
     @Override
     public boolean isChecked() {
-        return !SystemProperties.getBoolean(BLUR_DISABLE_PROP, false);
+        return Settings.Global.getInt(
+            mContext.getContentResolver(),
+            Settings.Global.DISABLE_WINDOW_BLURS, 0) == 0;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        SystemProperties.set(BLUR_DISABLE_PROP, isChecked ? "0" : "1");
-        SystemProperties.set("ctl.restart", "surfaceflinger");
+        Settings.Global.putInt(
+            mContext.getContentResolver(),
+            Settings.Global.DISABLE_WINDOW_BLURS, isChecked ? 0 : 1);
         return true;
     }
 
