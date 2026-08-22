@@ -214,12 +214,6 @@
             android:title="@string/tap_to_wake"
             android:summary="@string/tap_to_wake_summary"/>
 
-        <SwitchPreferenceCompat
-            android:key="blur_enabled"
-            android:title="@string/blur_enabled_title"
-            android:summary="@string/blur_enabled_summary"
-            settings:controller="com.android.settings.display.BlurPreferenceController"/>
-
         <ListPreference
             android:key="theme"
             android:title="@string/device_theme"

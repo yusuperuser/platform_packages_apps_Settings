@@ -25,12 +25,6 @@
         settings:searchable="false"
         settings:controller="com.android.settings.display.darkmode.DarkModeTopIntroPreferenceController"/>
 
-    <SwitchPreferenceCompat
-        android:key="true_dark_enabled"
-        android:title="@string/accessibility_true_dark_theme_title"
-        android:summary="@string/accessibility_true_dark_theme_summary"
-        settings:controller="com.android.settings.display.TrueDarkPreferenceController" />
-
     <com.android.settingslib.widget.MainSwitchPreference
         android:key="dark_ui_activated"
         android:title="@string/dark_theme_main_switch_title"
