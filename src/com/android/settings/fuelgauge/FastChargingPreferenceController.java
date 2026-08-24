@@ -2,14 +2,15 @@ package com.android.settings.fuelgauge;
 
 import android.content.Context;
 import androidx.preference.Preference;
-import androidx.preference.TwoStatePreference;
-import com.android.settings.core.TogglePreferenceController;
+import androidx.preference.SwitchPreferenceCompat;
+import com.android.settings.core.BasePreferenceController;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class FastChargingPreferenceController extends TogglePreferenceController {
+public class FastChargingPreferenceController extends BasePreferenceController {
 
+    private static final String PREF_KEY = "fast_charging_enabled";
     private static final String FAST_CHARGE_PATH = "/sys/class/qcom-battery/restrict_chg";
 
     public FastChargingPreferenceController(Context context, String preferenceKey) {
@@ -22,7 +23,23 @@ public class FastChargingPreferenceController extends TogglePreferenceController
     }
 
     @Override
-    public boolean isChecked() {
+    public void updateState(Preference preference) {
+        if (preference instanceof SwitchPreferenceCompat) {
+            ((SwitchPreferenceCompat) preference).setChecked(isFastChargingEnabled());
+        }
+    }
+
+    @Override
+    public boolean handlePreferenceTreeClick(Preference preference) {
+        if (!PREF_KEY.equals(preference.getKey())) return false;
+        if (preference instanceof SwitchPreferenceCompat) {
+            boolean enabled = ((SwitchPreferenceCompat) preference).isChecked();
+            setFastCharging(enabled);
+        }
+        return true;
+    }
+
+    private boolean isFastChargingEnabled() {
         try (FileReader fr = new FileReader(FAST_CHARGE_PATH)) {
             return fr.read() == '0';
         } catch (IOException e) {
@@ -30,26 +47,11 @@ public class FastChargingPreferenceController extends TogglePreferenceController
         }
     }
 
-    @Override
-    public boolean setChecked(boolean isChecked) {
+    private void setFastCharging(boolean enable) {
         try (FileWriter fw = new FileWriter(FAST_CHARGE_PATH)) {
-            fw.write(isChecked ? "0" : "1");
-            return true;
+            fw.write(enable ? "0" : "1");
         } catch (IOException e) {
-            return false;
+            // ignore
         }
-    }
-
-    @Override
-    public void updateState(Preference preference) {
-        super.updateState(preference);
-        if (preference instanceof TwoStatePreference) {
-            ((TwoStatePreference) preference).setChecked(isChecked());
-        }
-    }
-
-    @Override
-    public int getSliceHighlightMenuRes() {
-        return 0;
     }
 }
