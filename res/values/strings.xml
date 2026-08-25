@@ -14953,4 +14953,6 @@
     <string name="fast_charging_summary">Enable fast charging when plugged in</string>
     <string name="enable_blurs_on_windows_title">Enable window blur</string>
     <string name="enable_blurs_on_windows_summary">Enable blur effects on windows and backgrounds</string>
+    <string name="true_dark_mode_title">True dark</string>
+    <string name="true_dark_mode_summary">Force pure black backgrounds in dark mode</string>
 </resources>

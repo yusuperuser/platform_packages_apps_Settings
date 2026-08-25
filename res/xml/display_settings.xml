@@ -108,6 +108,13 @@
             android:summary="@string/enable_blurs_on_windows_summary"
             settings:controller="com.android.settings.display.EnableBlursPreferenceController"/>
 
+
+	<SwitchPreferenceCompat
+	    android:key="true_dark_mode"
+	    android:title="@string/true_dark_mode_title"
+	    android:summary="@string/true_dark_mode_summary"
+	    settings:controller="com.android.settings.display.TrueDarkPreferenceController"/>
+
 	<Preference
 	    android:key="android.theme.customization.fonts"
 	    android:title="@string/theme_customization_font_title"
