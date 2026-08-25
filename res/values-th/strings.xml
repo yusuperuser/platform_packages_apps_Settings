@@ -5999,4 +5999,8 @@
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
     <string name="fast_charging_title">ชาร์จเร็ว</string>
     <string name="fast_charging_summary">เพิ่มความเร็วในการชาร์จเมื่อเสียบสาย</string>
+    <string name="enable_blurs_on_windows_title">เปิดใช้การเบลอหน้าต่าง</string>
+    <string name="enable_blurs_on_windows_summary">เปิดใช้เอฟเฟกต์เบลอบนหน้าต่างและพื้นหลัง</string>
+    <string name="true_dark_mode_title">โหมดมืดสนิท</string>
+    <string name="true_dark_mode_summary">บังคับพื้นหลังสีดำสนิทในโหมดมืด</string>
 </resources>

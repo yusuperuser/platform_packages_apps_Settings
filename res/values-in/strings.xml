@@ -5999,4 +5999,8 @@
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
     <string name="fast_charging_title">Pengisian Cepat</string>
     <string name="fast_charging_summary">Percepat pengisian daya saat terhubung</string>
+    <string name="enable_blurs_on_windows_title">Aktifkan Blur Jendela</string>
+    <string name="enable_blurs_on_windows_summary">Aktifkan efek blur pada jendela dan latar belakang</string>
+    <string name="true_dark_mode_title">Mode Gelap Penuh</string>
+    <string name="true_dark_mode_summary">Paksa latar belakang hitam pekat di mode gelap</string>
 </resources>

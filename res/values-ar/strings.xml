@@ -6003,4 +6003,8 @@
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
     <string name="fast_charging_title">الشحن السريع</string>
     <string name="fast_charging_summary">تسريع الشحن عند التوصيل</string>
+    <string name="enable_blurs_on_windows_title">تفعيل تمويه النوافذ</string>
+    <string name="enable_blurs_on_windows_summary">تفعيل تأثيرات التمويه على النوافذ والخلفيات</string>
+    <string name="true_dark_mode_title">الوضع الداكن الحقيقي</string>
+    <string name="true_dark_mode_summary">إجبار الخلفيات السوداء الخالصة في الوضع الداكن</string>
 </resources>

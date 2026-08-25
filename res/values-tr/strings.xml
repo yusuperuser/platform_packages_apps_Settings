@@ -6000,4 +6000,8 @@
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
     <string name="fast_charging_title">Hızlı Şarj</string>
     <string name="fast_charging_summary">Bağlandığında şarjı hızlandır</string>
+    <string name="enable_blurs_on_windows_title">Pencere bulanıklığını etkinleştir</string>
+    <string name="enable_blurs_on_windows_summary">Pencereler ve arka planlarda bulanıklık efektlerini etkinleştir</string>
+    <string name="true_dark_mode_title">Gerçek karanlık mod</string>
+    <string name="true_dark_mode_summary">Karanlık modda saf siyah arka planları zorla</string>
 </resources>

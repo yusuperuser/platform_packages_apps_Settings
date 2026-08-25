@@ -5999,4 +5999,8 @@
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
     <string name="fast_charging_title">快速充電</string>
     <string name="fast_charging_summary">插入電源時加快充電速度</string>
+    <string name="enable_blurs_on_windows_title">啟用視窗模糊</string>
+    <string name="enable_blurs_on_windows_summary">在視窗和背景上啟用模糊效果</string>
+    <string name="true_dark_mode_title">真正深色模式</string>
+    <string name="true_dark_mode_summary">在深色模式下強制使用純黑色背景</string>
 </resources>

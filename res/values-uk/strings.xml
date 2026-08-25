@@ -6001,4 +6001,8 @@
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
     <string name="fast_charging_title">Швидке заряджання</string>
     <string name="fast_charging_summary">Прискорити заряджання при підключенні</string>
+    <string name="enable_blurs_on_windows_title">Увімкнути розмиття вікон</string>
+    <string name="enable_blurs_on_windows_summary">Увімкнути ефекти розмиття на вікнах і фонах</string>
+    <string name="true_dark_mode_title">Справжня темна тема</string>
+    <string name="true_dark_mode_summary">Примусово використовувати чисто чорний фон у темному режимі</string>
 </resources>

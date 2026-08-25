@@ -5999,4 +5999,8 @@
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
     <string name="fast_charging_title">Carga rápida</string>
     <string name="fast_charging_summary">Acelerar la carga al conectar</string>
+    <string name="enable_blurs_on_windows_title">Activar desenfoque de ventana</string>
+    <string name="enable_blurs_on_windows_summary">Activar efectos de desenfoque en ventanas y fondos</string>
+    <string name="true_dark_mode_title">Modo oscuro verdadero</string>
+    <string name="true_dark_mode_summary">Forzar fondos negros puros en el modo oscuro</string>
 </resources>

@@ -5999,4 +5999,8 @@
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
     <string name="fast_charging_title">Sạc nhanh</string>
     <string name="fast_charging_summary">Tăng tốc độ sạc khi cắm điện</string>
+    <string name="enable_blurs_on_windows_title">Bật làm mờ cửa sổ</string>
+    <string name="enable_blurs_on_windows_summary">Bật hiệu ứng làm mờ trên cửa sổ và nền</string>
+    <string name="true_dark_mode_title">Chế độ tối thực sự</string>
+    <string name="true_dark_mode_summary">Buộc nền đen thuần túy trong chế độ tối</string>
 </resources>

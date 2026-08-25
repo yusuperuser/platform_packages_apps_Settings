@@ -5999,4 +5999,8 @@
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
     <string name="fast_charging_title">Ricarica rapida</string>
     <string name="fast_charging_summary">Accelera la ricarica quando collegato</string>
+    <string name="enable_blurs_on_windows_title">Attiva sfocatura finestre</string>
+    <string name="enable_blurs_on_windows_summary">Attiva gli effetti di sfocatura su finestre e sfondi</string>
+    <string name="true_dark_mode_title">Modalità scura vera</string>
+    <string name="true_dark_mode_summary">Forza sfondi neri puri in modalità scura</string>
 </resources>

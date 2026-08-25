@@ -5999,4 +5999,8 @@
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
     <string name="fast_charging_title">고속 충전</string>
     <string name="fast_charging_summary">연결 시 충전 속도 향상</string>
+    <string name="enable_blurs_on_windows_title">창 흐림 효과 활성화</string>
+    <string name="enable_blurs_on_windows_summary">창과 배경에 흐림 효과 적용</string>
+    <string name="true_dark_mode_title">완전 다크 모드</string>
+    <string name="true_dark_mode_summary">다크 모드에서 순수 검정 배경 강제 적용</string>
 </resources>

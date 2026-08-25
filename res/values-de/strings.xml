@@ -5999,4 +5999,8 @@
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
     <string name="fast_charging_title">Schnellladen</string>
     <string name="fast_charging_summary">Laden beim Anschluss beschleunigen</string>
+    <string name="enable_blurs_on_windows_title">Fensterunschärfe aktivieren</string>
+    <string name="enable_blurs_on_windows_summary">Unschärfeeffekte auf Fenstern und Hintergründen aktivieren</string>
+    <string name="true_dark_mode_title">Echtes Dunkel</string>
+    <string name="true_dark_mode_summary">Reinen schwarzen Hintergrund im Dunkelmodus erzwingen</string>
 </resources>

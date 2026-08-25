@@ -6001,4 +6001,8 @@
     <string name="safety_center_system_component_update_search_terms" msgid="3110390275537109543"></string>
     <string name="fast_charging_title">Szybkie ładowanie</string>
     <string name="fast_charging_summary">Przyspiesz ładowanie po podłączeniu</string>
+    <string name="enable_blurs_on_windows_title">Włącz rozmycie okna</string>
+    <string name="enable_blurs_on_windows_summary">Włącz efekty rozmycia na oknach i tłach</string>
+    <string name="true_dark_mode_title">Prawdziwy ciemny motyw</string>
+    <string name="true_dark_mode_summary">Wymuś czysto czarne tło w trybie ciemnym</string>
 </resources>
