@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.om.IOverlayManager;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.provider.Settings;
 
 import com.android.settings.core.TogglePreferenceController;
 
@@ -37,6 +38,11 @@ public class TrueDarkPreferenceController extends TogglePreferenceController {
     public boolean setChecked(boolean isChecked) {
         try {
             mOverlayManager.setEnabled(OVERLAY_PKG, isChecked, android.os.UserHandle.myUserId());
+            // Tell ThemeOverlayController to skip generating Monet dynamic color
+            // overlays while True Dark is active, so it can't override our
+            // pure-black surface colors on wallpaper/theme change.
+            Settings.Secure.putInt(mContext.getContentResolver(),
+                    "true_dark_active", isChecked ? 1 : 0);
             return true;
         } catch (RemoteException e) {
             return false;
