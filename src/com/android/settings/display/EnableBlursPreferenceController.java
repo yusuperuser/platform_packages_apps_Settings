@@ -9,15 +9,15 @@ import androidx.preference.Preference;
 import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settings.core.BasePreferenceController;
 
-public final class EnableBlursPreferenceController extends AbstractPreferenceController
+public final class EnableBlursPreferenceController extends BasePreferenceController
         implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
     private static final String ENABLE_BLURS_ON_WINDOWS = "enable_blurs_on_windows";
 
-    public EnableBlursPreferenceController(Context context) {
-        super(context);
+    public EnableBlursPreferenceController(Context context, String key) {
+        super(context, key);
     }
 
     @Override
@@ -34,8 +34,8 @@ public final class EnableBlursPreferenceController extends AbstractPreferenceCon
     }
 
     @Override
-    public boolean isAvailable() {
-        return CROSS_WINDOW_BLUR_SUPPORTED;
+    public int getAvailabilityStatus() {
+        return CROSS_WINDOW_BLUR_SUPPORTED ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
